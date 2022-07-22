@@ -1,0 +1,39 @@
+<div>
+  <div class="submit-form">
+    <div>
+      <h4>Todo</h4>
+      <div class="shadow bg-white rounded p-3">
+        <form [formGroup]="todoForm" novalidate>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              formControlName="title"
+              autofocus
+              required
+              [(ngModel)]="todo.title"
+              name="title"
+            />
+          </div>
+          <div *ngIf="todoForm.controls['title'].invalid && (todoForm.controls['title'].dirty || todoForm.controls['title'].touched)" class="alert alert-danger">
+            <div *ngIf="todoForm.controls['title'].errors?['required']:false">
+              Title is required.
+            </div>
+          </div>
+          <div class="form-group mt-2">
+            <label for="description">Description</label>
+            <textarea class="form-control" [(ngModel)]="todo.description" formControlName="description" name="description" id="description" rows="10"
+                      mdInput placeholder="Description">
+        </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 d-flex justify-content-end mt-3">
+        <button [disabled]="todoForm.invalid" (click)="saveTodo()" class="btn btn-success">OK</button>
+        <button (click)="back()" class="btn btn-danger ms-2">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
